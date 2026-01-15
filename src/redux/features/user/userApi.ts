@@ -1,6 +1,5 @@
 import { baseApi } from "../../baseApi";
 import type {
-  User,
   UsersResponse,
   UserResponse,
   UserQueryParams,

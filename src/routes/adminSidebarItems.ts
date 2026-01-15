@@ -1,5 +1,5 @@
 import { lazy } from "react";
-import { LayoutDashboard, Building2, FolderPlus, Users, UserPlus, FolderCog } from "lucide-react";
+import { LayoutDashboard, FolderPlus, Users, UserPlus, FolderCog } from "lucide-react";
 import type { ISidebarItem } from "@/types";
 
 const AdminDashboard = lazy(() => import("@/pages/admin/Dashboard"));
