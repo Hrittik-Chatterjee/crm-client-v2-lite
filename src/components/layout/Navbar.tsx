@@ -14,10 +14,15 @@ export default function Navbar() {
   const handleLogout = async () => {
     try {
       await logout().unwrap();
+      // Clear stored token (mobile fallback)
+      localStorage.removeItem("auth_token");
       toast.success("Logged out successfully", { duration: 1000 });
       navigate("/login");
     } catch (error) {
+      // Still clear token and redirect even if API fails
+      localStorage.removeItem("auth_token");
       toast.error("Failed to logout", { duration: 1000 });
+      navigate("/login");
     }
   };
 

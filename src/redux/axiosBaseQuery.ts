@@ -16,12 +16,19 @@ const axiosBaseQuery =
   ): BaseQueryFn<AxiosQueryArgs, unknown, unknown> =>
   async ({ url, method = "GET", data, params, headers }) => {
     try {
+      // Get token from localStorage as fallback for mobile browsers
+      const token = localStorage.getItem("auth_token");
+
       const result = await axios({
         url: baseUrl + url,
         method,
         data,
         params,
-        headers,
+        headers: {
+          ...headers,
+          // Add Authorization header if token exists (fallback for mobile)
+          ...(token && { Authorization: `Bearer ${token}` }),
+        },
         withCredentials: true,
       });
       return { data: result.data };

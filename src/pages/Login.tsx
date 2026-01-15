@@ -41,6 +41,12 @@ export default function Login() {
   const onSubmit = async (data: LoginFormData) => {
     try {
       const result = await login(data).unwrap();
+
+      // Store token as fallback for mobile browsers where cookies might not work
+      if (result.data?.token) {
+        localStorage.setItem("auth_token", result.data.token);
+      }
+
       toast.success(result.message || "Login successful", { duration: 1000 });
 
       // All users go to common dashboard after login

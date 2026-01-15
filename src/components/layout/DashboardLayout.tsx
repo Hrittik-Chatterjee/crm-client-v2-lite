@@ -30,10 +30,15 @@ export default function DashboardLayout() {
   const handleLogout = async () => {
     try {
       await logout().unwrap();
+      // Clear stored token (mobile fallback)
+      localStorage.removeItem("auth_token");
       toast.success("Logged out successfully");
       navigate("/login");
     } catch {
+      // Still clear token and redirect even if API fails
+      localStorage.removeItem("auth_token");
       toast.error("Failed to logout");
+      navigate("/login");
     }
   };
 
