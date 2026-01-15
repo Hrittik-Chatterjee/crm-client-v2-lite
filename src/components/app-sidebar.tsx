@@ -39,7 +39,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 ) : (
                   <img
                     src="/assets/logo1.svg"
-                    alt="flamestack creaton logo"
+                    alt="Flarestack creaton logo"
                     className="h-8 w-auto"
                   />
                 )}

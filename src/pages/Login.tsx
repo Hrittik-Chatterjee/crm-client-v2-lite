@@ -69,7 +69,7 @@ export default function Login() {
         <div className="flex justify-center pt-8 pb-4">
           <img
             src="/assets/logo1.svg"
-            alt="Flamestack creation logo"
+            alt="Flarestack creation logo"
             className="h-20 w-auto"
           />
         </div>

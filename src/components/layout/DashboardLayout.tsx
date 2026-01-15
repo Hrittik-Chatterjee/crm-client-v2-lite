@@ -61,7 +61,7 @@ export default function DashboardLayout() {
                 <BreadcrumbLink
                   href={isOnAdminRoute ? "/admin/dashboard" : "/dashboard"}
                 >
-                  FlameStack Creation
+                  Flarestack Creation
                 </BreadcrumbLink>
               </BreadcrumbItem>
             </BreadcrumbList>
