@@ -21,7 +21,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { state } = useSidebar();
 
   // Determine if user is on admin route
-  const isOnAdminRoute = location.pathname.startsWith('/admin');
+  const isOnAdminRoute = location.pathname.startsWith("/admin");
   const userRoles = userData?.data?.roles;
   const sidebarSections = getSidebarItems(isOnAdminRoute, userRoles);
 
@@ -39,7 +39,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 ) : (
                   <img
                     src="/assets/logo1.svg"
-                    alt="SR Creative Hub"
+                    alt="flamestack creaton logo"
                     className="h-8 w-auto"
                   />
                 )}
@@ -64,7 +64,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                       tooltip={item.title}
                     >
                       <Link to={item.url}>
-                        {IconComponent && <IconComponent className="text-cyan-500" />}
+                        {IconComponent && (
+                          <IconComponent className="text-cyan-500" />
+                        )}
                         <span>{item.title}</span>
                       </Link>
                     </SidebarMenuButton>

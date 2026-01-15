@@ -56,7 +56,7 @@ export default function DashboardLayout() {
                 <BreadcrumbLink
                   href={isOnAdminRoute ? "/admin/dashboard" : "/dashboard"}
                 >
-                  SR CREATIVE HUB CONSOLE
+                  FlameStack Creation
                 </BreadcrumbLink>
               </BreadcrumbItem>
             </BreadcrumbList>
