@@ -1,4 +1,4 @@
-import { Home, Settings } from "lucide-react";
+import { Home } from "lucide-react";
 import { Link, useLocation } from "react-router";
 import {
   Sidebar,

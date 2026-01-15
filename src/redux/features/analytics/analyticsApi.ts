@@ -1,5 +1,5 @@
 import { baseApi } from "../../baseApi";
-import type { DashboardStats, DashboardStatsResponse } from "@/types";
+import type { DashboardStatsResponse } from "@/types";
 
 export const analyticsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
