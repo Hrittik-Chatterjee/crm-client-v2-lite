@@ -1,4 +1,4 @@
-import { StrictMode } from "react";
+import { StrictMode, Suspense } from "react";
 import { createRoot } from "react-dom/client";
 import { RouterProvider } from "react-router";
 import { Provider } from "react-redux";
@@ -12,7 +12,9 @@ createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <Provider store={store}>
       <ThemeProvider defaultTheme="light" storageKey="crm-theme">
-        <RouterProvider router={router} />
+        <Suspense fallback={<div className="flex h-screen items-center justify-center">Loading...</div>}>
+          <RouterProvider router={router} />
+        </Suspense>
         <Toaster position="top-center" richColors closeButton />
       </ThemeProvider>
     </Provider>

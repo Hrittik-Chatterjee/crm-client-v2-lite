@@ -39,7 +39,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { format } from "date-fns";
 import { Switch } from "@/components/ui/switch";
-import { Filter, Check, ChevronDown, FileText } from "lucide-react";
+import { Filter, Check, ChevronDown, FileText, RefreshCw } from "lucide-react";
 import { useGetAllBusinessesQuery } from "@/redux/features/business/businessApi";
 import {
   useGetAllRegularContentsQuery,
@@ -280,7 +280,7 @@ export default function Dashboard() {
   // RTK Query hooks - Use backend date filtering for better performance with large datasets
   const { data: businessesData, isLoading: isLoadingBusinesses } =
     useGetAllBusinessesQuery();
-  const { data: contentsData, isLoading: isLoadingContents } =
+  const { data: contentsData, isLoading: isLoadingContents, isFetching, refetch } =
     useGetAllRegularContentsQuery({
       date: format(date, "MM/dd/yyyy"),
     });
@@ -430,40 +430,52 @@ export default function Dashboard() {
             <span className="sm:hidden">{format(date, "MMM d, yyyy")}</span>
           </p>
         </div>
-        <Popover>
-          <PopoverTrigger asChild>
-            <Button
-              variant="outline"
-              className="w-full sm:w-auto sm:min-w-[200px] justify-start text-left font-normal text-sm sm:text-base hover:bg-white hover:border-blue-600 transition-all dark:hover:bg-blue-950/40 dark:hover:border-blue-600"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="mr-2"
+        <div className="flex gap-2 w-full sm:w-auto">
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button
+                variant="outline"
+                className="flex-1 sm:flex-none sm:min-w-[200px] justify-start text-left font-normal text-sm sm:text-base hover:bg-white hover:border-blue-600 transition-all dark:hover:bg-blue-950/40 dark:hover:border-blue-600"
               >
-                <rect width="18" height="18" x="3" y="4" rx="2" ry="2" />
-                <line x1="16" x2="16" y1="2" y2="6" />
-                <line x1="8" x2="8" y1="2" y2="6" />
-                <line x1="3" x2="21" y1="10" y2="10" />
-              </svg>
-              {format(date, "MMM d, yyyy")}
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent className="w-auto p-0" align="center">
-            <Calendar
-              mode="single"
-              selected={date}
-              onSelect={(newDate) => newDate && setDate(newDate)}
-            />
-          </PopoverContent>
-        </Popover>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="mr-2"
+                >
+                  <rect width="18" height="18" x="3" y="4" rx="2" ry="2" />
+                  <line x1="16" x2="16" y1="2" y2="6" />
+                  <line x1="8" x2="8" y1="2" y2="6" />
+                  <line x1="3" x2="21" y1="10" y2="10" />
+                </svg>
+                {format(date, "MMM d, yyyy")}
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-auto p-0" align="center">
+              <Calendar
+                mode="single"
+                selected={date}
+                onSelect={(newDate) => newDate && setDate(newDate)}
+              />
+            </PopoverContent>
+          </Popover>
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={() => refetch()}
+            disabled={isFetching}
+            className="hover:bg-white hover:border-blue-600 transition-all dark:hover:bg-blue-950/40 dark:hover:border-blue-600"
+            title="Refresh content"
+          >
+            <RefreshCw className={`h-4 w-4 ${isFetching ? "animate-spin" : ""}`} />
+          </Button>
+        </div>
       </div>
       <DataTable
         columns={columns}

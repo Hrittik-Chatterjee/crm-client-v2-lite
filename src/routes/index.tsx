@@ -1,16 +1,19 @@
+import { lazy } from "react";
 import { createBrowserRouter, Navigate } from "react-router";
 import App from "@/App";
 import DashboardLayout from "@/components/layout/DashboardLayout";
-import Login from "@/pages/Login";
-import Unauthorized from "@/pages/Unauthorized";
-import NotFound from "@/pages/NotFound";
-import EditBusiness from "@/pages/admin/EditBusiness";
-import EditUser from "@/pages/admin/EditUser";
 import { withAuth } from "@/utils/withAuth";
 import { role } from "@/constants/role";
 import { generateRoutes } from "@/utils/generateRoutes";
 import { adminSidebarItems } from "./adminSidebarItems";
 import { regularUserSidebarItems } from "./regularUserSidebarItems";
+
+// Lazy load pages for better initial load performance
+const Login = lazy(() => import("@/pages/Login"));
+const Unauthorized = lazy(() => import("@/pages/Unauthorized"));
+const NotFound = lazy(() => import("@/pages/NotFound"));
+const EditBusiness = lazy(() => import("@/pages/admin/EditBusiness"));
+const EditUser = lazy(() => import("@/pages/admin/EditUser"));
 
 // Create protected layouts
 // Common dashboard - all authenticated users (CW, CD, VE)
