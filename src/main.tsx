@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import { ThemeProvider } from "@/providers/ThemeProvider";
 import { store } from "@/redux/store";
 import { router } from "@/routes";
+import ChunkErrorBoundary from "@/components/ChunkErrorBoundary";
 import "./index.css";
 import { Toaster } from "sonner";
 
@@ -12,9 +13,11 @@ createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <Provider store={store}>
       <ThemeProvider defaultTheme="light" storageKey="crm-theme">
-        <Suspense fallback={<div className="flex h-screen items-center justify-center">Loading...</div>}>
-          <RouterProvider router={router} />
-        </Suspense>
+        <ChunkErrorBoundary>
+          <Suspense fallback={<div className="flex h-screen items-center justify-center">Loading...</div>}>
+            <RouterProvider router={router} />
+          </Suspense>
+        </ChunkErrorBoundary>
         <Toaster position="top-center" richColors closeButton />
       </ThemeProvider>
     </Provider>
