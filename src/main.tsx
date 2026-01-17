@@ -2,6 +2,7 @@ import { StrictMode, Suspense } from "react";
 import { createRoot } from "react-dom/client";
 import { RouterProvider } from "react-router";
 import { Provider } from "react-redux";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import { ThemeProvider } from "@/providers/ThemeProvider";
 import { store } from "@/redux/store";
 import { router } from "@/routes";
@@ -19,6 +20,7 @@ createRoot(document.getElementById("root")!).render(
           </Suspense>
         </ChunkErrorBoundary>
         <Toaster position="top-center" richColors closeButton />
+        <SpeedInsights />
       </ThemeProvider>
     </Provider>
   </StrictMode>
