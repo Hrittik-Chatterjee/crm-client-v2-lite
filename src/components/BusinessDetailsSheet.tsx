@@ -38,6 +38,15 @@ interface BusinessDetailsSheetProps {
   onOpenChange: (open: boolean) => void;
 }
 
+// Helper to ensure URLs have proper protocol
+const ensureProtocol = (url: string): string => {
+  if (!url) return url;
+  if (url.startsWith("http://") || url.startsWith("https://")) {
+    return url;
+  }
+  return `https://${url}`;
+};
+
 export function BusinessDetailsSheet({
   business,
   open,
@@ -102,7 +111,7 @@ export function BusinessDetailsSheet({
         <div className="rounded-md border border-input bg-muted/30 px-3 py-2 text-sm">
           {isLink ? (
             <a
-              href={value}
+              href={ensureProtocol(value)}
               target="_blank"
               rel="noopener noreferrer"
               className="text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1"
@@ -156,7 +165,7 @@ export function BusinessDetailsSheet({
             <div className="flex items-center gap-2 min-w-0">
               <Globe className="h-3 w-3 text-muted-foreground shrink-0" />
               <a
-                href={credentials.url}
+                href={ensureProtocol(credentials.url)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-blue-600 dark:text-blue-400 hover:underline text-sm flex items-center gap-1"
