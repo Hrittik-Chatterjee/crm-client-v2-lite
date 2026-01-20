@@ -17,6 +17,15 @@ import {
 } from "lucide-react";
 import type { Business } from "@/types";
 
+// Helper to ensure URLs have proper protocol
+const ensureProtocol = (url: string): string => {
+  if (!url) return url;
+  if (url.startsWith("http://") || url.startsWith("https://")) {
+    return url;
+  }
+  return `https://${url}`;
+};
+
 interface BusinessCardProps {
   business: Business;
   onView: (business: Business) => void;
@@ -176,7 +185,7 @@ export function BusinessCard({
                 return (
                   <a
                     key={link.label}
-                    href={link.url}
+                    href={ensureProtocol(link.url!)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`inline-flex items-center gap-1 text-xs px-2 py-1 rounded-md transition-colors ${getBrandColors(link.label)}`}
