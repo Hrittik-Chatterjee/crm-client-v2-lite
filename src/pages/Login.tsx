@@ -70,6 +70,8 @@ export default function Login() {
           <img
             src="/assets/logo1.svg"
             alt="Flarestack creation logo"
+            width={80}
+            height={80}
             className="h-20 w-auto"
           />
         </div>
